@@ -7,6 +7,6 @@
 
 #include <Arduino.h>
 
-void perform_ota_update(String url);
+void performOTAUpdate(String url);
 
 #endif //ESP32QOL_H

@@ -7,7 +7,7 @@
 #include <Update.h>
 #include <HTTPClient.h>
 
-void perform_ota_update(String url) {
+void performOTAUpdate(String url) {
     WiFiClientSecure httpClient;
     httpClient.setInsecure();  // Use HTTPS without SSL verification (for testing)
     HTTPClient http;
