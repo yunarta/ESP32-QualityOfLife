@@ -53,7 +53,7 @@ bool performOTAUpdateOnly(String url) {
         }
 
 #ifdef LOG_DEBUG
-        Serial.printf(R"([DEBUG] Redirecting to: %s\n)", newUrl.c_str());
+        Serial.printf("[DEBUG] Redirecting to: %s\n", newUrl.c_str());
 #endif
         http.end();
         http.begin(httpClient, newUrl);
@@ -84,9 +84,6 @@ bool performOTAUpdateOnly(String url) {
                 uint8_t buff[128];
                 int read = stream->readBytes(buff, ((size > sizeof(buff)) ? sizeof(buff) : size));
                 written += Update.write(buff, read);
-#ifdef LOG_DEBUG
-                Serial.printf("[DEBUG] Written: %u bytes\n", static_cast<unsigned int>(written));
-#endif
             }
         }
 
@@ -116,8 +113,8 @@ void OTAUpdateClass::begin(const String &appVersion, const String &url) {
     preferences.begin("OTAUpdate", false);
     String currentVersion = preferences.getString("appVersion", "");
 #ifdef LOG_DEBUG
-    Serial.printf(R"([DEBUG] Current app version: %s\n)", currentVersion.c_str());
-    Serial.printf(R"([DEBUG] Target app version: %s\n)", appVersion.c_str());
+    Serial.printf("[DEBUG] Current app version: %s\n", currentVersion.c_str());
+    Serial.printf("[DEBUG] Target app version: %s\n", appVersion.c_str());
 #endif
     if (!currentVersion.equalsIgnoreCase(appVersion)) {
 #ifdef LOG_INFO
@@ -127,7 +124,7 @@ void OTAUpdateClass::begin(const String &appVersion, const String &url) {
 #ifdef LOG_INFO
             Serial.println(F("[INFO] OTA Update Successful! Restarting..."));
 #endif
-            preferences.putString("appVersion", "");
+            preferences.putString("appVersion", appVersion);
             preferences.putBool("pendingValidation", true);
             ESP.restart();
         } else {
