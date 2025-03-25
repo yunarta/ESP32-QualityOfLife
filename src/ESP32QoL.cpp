@@ -53,7 +53,7 @@ bool performOTAUpdateOnly(String url) {
         }
 
 #ifdef LOG_DEBUG
-        Serial.printf("[DEBUG] Redirecting to: %s\n", newUrl.c_str());
+        Serial.printf_P(PSTR("[DEBUG] Redirecting to: %s\n"), newUrl.c_str());
 #endif
         http.end();
         http.begin(httpClient, newUrl);
@@ -99,7 +99,7 @@ bool performOTAUpdateOnly(String url) {
         }
     } else {
 #ifdef LOG_INFO
-        Serial.printf("[INFO] HTTP Request Failed, Error: %d\n", httpCode);
+        Serial.printf_P(PSTR("[INFO] HTTP Request Failed, Error: %d\n"), httpCode);
 #endif
         return false;
     }
@@ -113,8 +113,8 @@ void OTAUpdateClass::begin(const String &appVersion, const String &url) {
     preferences.begin("OTAUpdate", false);
     String currentVersion = preferences.getString("appVersion", "");
 #ifdef LOG_DEBUG
-    Serial.printf("[DEBUG] Current app version: %s\n", currentVersion.c_str());
-    Serial.printf("[DEBUG] Target app version: %s\n", appVersion.c_str());
+    Serial.printf_P(PSTR("[DEBUG] Current app version: %s\n"), currentVersion.c_str());
+    Serial.printf_P(PSTR("[DEBUG] Target app version: %s\n"), appVersion.c_str());
 #endif
     if (!currentVersion.equalsIgnoreCase(appVersion)) {
 #ifdef LOG_INFO
