@@ -109,10 +109,10 @@ void OTAUpdateClass::begin(const String &appVersion, const String &url) {
 }
 
 void OTAUpdateClass::markAsValid() {
-    Serial.println(F("[INFO] Marking OTA update as valid..."));
     Preferences preferences;
     preferences.begin("OTAUpdate", false);
     if (preferences.getBool("pendingValidation", false)) {
+        Serial.println(F("[INFO] Marking OTA update as valid..."));
         esp_ota_mark_app_valid_cancel_rollback();
         preferences.putBool("pendingValidation", false);
     }
