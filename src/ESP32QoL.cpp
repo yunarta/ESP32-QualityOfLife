@@ -2,11 +2,13 @@
  * @file ESP32QoL.cpp
  * @author yunarta
  * @date 3/17/25
- * @brief Implementation of ESP32 Quality of Life library for OTA updates
+ * @brief Implementation of an ESP32 Quality of Life library for OTA updates
  * 
  * This file implements the functions declared in ESP32QoL.h for downloading,
  * applying, and validating OTA updates on ESP32 devices.
  */
+
+// ReSharper disable CppMemberFunctionMayBeStatic
 
 #include "ESP32QoL.h"
 
@@ -111,10 +113,10 @@ bool downloadAndApplyUpdate(HTTPClient &http) {
     int lastProgress = -10;
 #endif
     // Download and write firmware
-    while (written < (size_t) contentLength) {
+    while (written < static_cast<size_t>(contentLength)) {
         size_t size = stream->available();
         if (size) {
-            size_t read = stream->readBytes(buff, min(sizeof(buff), size));
+            const size_t read = stream->readBytes(buff, min(sizeof(buff), size));
             written += Update.write(buff, read);
 #ifdef ESP32QOL_LOG
             int progress = (written * 100) / contentLength;
@@ -142,7 +144,7 @@ bool downloadAndApplyUpdate(HTTPClient &http) {
  * - Streaming the firmware to the update partition
  *
  * @param url URL of the firmware binary
- * @return true if update was successfully downloaded and applied
+ * @return true if the update was successfully downloaded and applied
  * @return false if the update failed at any stage
  */
 bool performOTAUpdateOnly(const String &url) {

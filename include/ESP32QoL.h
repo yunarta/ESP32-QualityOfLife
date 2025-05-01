@@ -39,7 +39,7 @@ bool performOTAUpdateOnly(const String &url);
 /**
  * @brief Class for managing OTA update processes with version checking
  *
- * This class provides methods to initiate OTA updates with version checking,
+ * This class provides methods to initiate OTA updates with version checking
  * and to interact with ESP32's rollback safety features.
  */
 class OTAUpdateClass {
@@ -48,7 +48,7 @@ public:
      * @brief Initiates an OTA update if the provided version differs from the current one
      *
      * Checks if the current firmware version differs from the specified one and,
-     * if so, downloads and applies a new firmware from the provided URL. After updating,
+     * if so, downloads and applies new firmware from the provided URL. After updating,
      * it marks the update as pending validation and restarts the device.
      *
      * @param appVersion The version string of the new firmware
@@ -76,7 +76,7 @@ public:
 /**
  * @brief Global instance of OTAUpdateClass
  *
- * Use this instance to access OTA update functionality.
+ * Uses this instance to access OTA update functionality.
  */
 extern const OTAUpdateClass OTAUpdate;
 
